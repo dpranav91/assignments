@@ -28,19 +28,19 @@ def mssl_1(lst, return_sublist=False):
 def mssl_2(l):
 
     best = cur = 0
-    start = end = 0
+    start_i = end = 0
     for index, num in enumerate(l):
         cur = max(cur + num, 0)
-        if cur <= 0 and start <= end:
-            start = index
-        if cur < best:
-            end = index
+        if cur <= 0 :
+            start_i = index
 
-        if start and end:
-            print l[start+1:end]
-        best = max(best, cur)
-    return best, l[start:end]
+        if cur>best:
+            start = start_i
+            end = index
+            best = cur
+
+    return best, l[start+1:end+1]
 
 if __name__ == '__main__':
     print (mssl_1([4, 2, -8, 5, -2, 7, 7, 2, -6, -15, 6, -2]))
-    print (mssl_2([4, 2, -8, 5, -2, 7, 7, 2, -6, -15, 6, -2]))
+    print (mssl_2([4, 2, -8, 5, -2, 7, 7, 2, -6, 15, 6, -2, -13]))
